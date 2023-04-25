@@ -37,7 +37,7 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -50,9 +50,19 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+} */
+
+input[type="search"] {
+  min-width: 20em;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  border: 1px solid transparent;
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {
