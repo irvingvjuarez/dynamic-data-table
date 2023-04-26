@@ -1,7 +1,7 @@
 class Commerces {
   private _props: string[]
   private _apiRoot: string;
-  private _query: { [key: string]: object | string | boolean } = {}
+  private _filters: { [key: string]: object | string | boolean } = {}
   private _sorting: { [key: string]: object } = {}
 
   constructor(...props: string[]) {
@@ -25,7 +25,7 @@ class Commerces {
 
   public clearSorting() {
     this._sorting = {}
-    
+
     return this._sorting
   }
 
@@ -40,16 +40,16 @@ class Commerces {
         [option]: { "$regex": value }
       }))
 
-      this._query = { ...this._query, "$or": searchOptionsQueries }
+      this._filters = { ...this._filters, "$or": searchOptionsQueries }
     } else { // Simple statement
-      this._query = { ...this._query, [key]: value }
+      this._filters = { ...this._filters, [key]: value }
     }
 
-    return this._query
+    return this._filters
   }
 
-  public clearQuery() {
-    this._query = {}
+  public clearFilters() {
+    this._filters = {}
   }
 }
 
