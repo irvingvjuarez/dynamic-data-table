@@ -53,4 +53,22 @@ describe("Commerces controller tests", () => {
     await expect(commerces.sortBy("CUIT", "asc")).toEqual({"$orderby": {"CUIT": 1}})
     await expect(commerces.sortBy("CUIT", "desc")).toEqual({"$orderby": {"CUIT": -1}})
   })
+
+  test("Query building", async () => {
+    const commerces = new Commerces()
+    commerces.filterBy("active", true)
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'active':true}")
+
+    commerces.sortBy("Comercios")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'active':true}&h={'$orderby':{'Comercios':1}}")
+
+    commerces.clearQuery()
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores")
+
+    commerces.sortBy("CUIT")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?h={'$orderby':{'CUIT':1}}")
+
+    commerces.filterBy("active", false)
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?h={'$orderby':{'CUIT':1}}&q={'active':false}")
+  })
 })
