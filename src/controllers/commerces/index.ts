@@ -1,7 +1,9 @@
 class Commerces {
   private _props: string[]
+  private _apiRoot: string;
 
-  constructor(...props) {
+  constructor(...props: string[]) {
+    this._apiRoot = "https://api.koibanx.com/stores"
     this._props = [
       "ID", "Comercio", "CUIT",
       ...props,

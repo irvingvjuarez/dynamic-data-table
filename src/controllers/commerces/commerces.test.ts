@@ -11,4 +11,12 @@ describe("Commerces controller tests", () => {
     const commerces = new Commerces("Concepto 1", "Concepto 2", "Concepto 3")
     await expect(commerces.allProps()).toEqual(["ID", "Comercio", "CUIT", "Concepto 1", "Concepto 2", "Concepto 3", "Balance actual", "Activo", "Ultima venta"])
   })
+
+  test("Filter by", async () => {
+    const commerces = new Commerces()
+    await expect(commerces.filterBy("active", true)).toEqual({"active": true})
+    await expect(commerces.filterBy("active", false)).toEqual({"active": false})
+
+    await expect(commerces.filterBy("search", "34")).toEqual({"$or": [{"ID": {"$regex": "34"}}, {"CUIT": {"$regex": "34"}}, {"Comercio": {"$regex": "34"}}]})
+  })
 })
