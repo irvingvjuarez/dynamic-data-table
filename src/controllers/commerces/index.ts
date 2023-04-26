@@ -23,9 +23,9 @@ class Commerces {
         [option]: { "$regex": value }
       }))
 
-      this._query = { "$or": searchOptionsQueries }
+      this._query = { ...this._query, "$or": searchOptionsQueries }
     } else { // Simple statement
-      this._query = { [key]: value }
+      this._query = { ...this._query, [key]: value }
     }
 
     return this._query
