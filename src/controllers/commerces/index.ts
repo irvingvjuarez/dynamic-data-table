@@ -1,6 +1,7 @@
 class Commerces {
   private _props: string[]
   private _apiRoot: string;
+  private _query: { [key: string]: object | string | boolean }
 
   constructor(...props: string[]) {
     this._apiRoot = "https://api.koibanx.com/stores"
@@ -16,20 +17,22 @@ class Commerces {
   }
 
   public filterBy(key: string, value: string | boolean) {
-    let query
-
     if (key === "search") { // Or statement
       const searchOptions = ["ID", "CUIT", "Comercio"]
       const searchOptionsQueries = searchOptions.map(option => ({
         [option]: { "$regex": value }
       }))
 
-      query = { "$or": searchOptionsQueries }
+      this._query = { "$or": searchOptionsQueries }
     } else { // Simple statement
-      query = { [key]: value }
+      this._query = { [key]: value }
     }
 
-    return query
+    return this._query
+  }
+
+  public clearQuery() {
+    this._query = {}
   }
 }
 
