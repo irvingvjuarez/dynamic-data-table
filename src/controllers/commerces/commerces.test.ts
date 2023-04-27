@@ -70,5 +70,15 @@ describe("Commerces controller tests", () => {
 
     commerces.filterBy("active", false)
     await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?h={'$orderby':{'CUIT':1}}&q={'active':false}")
+
+    commerces.clearQuery()
+    commerces.clearFilters()
+    commerces.clearSorting()
+
+    commerces.filterBy("search", "34")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'$or':[{'ID':{'$regex':'34'}},{'CUIT':{'$regex':'34'}},{'Comercio':{'$regex':'34'}}]}")
+
+    commerces.sortBy("CUIT")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'$or':[{'ID':{'$regex':'34'}},{'CUIT':{'$regex':'34'}},{'Comercio':{'$regex':'34'}}]}&h={'$orderby':{'CUIT':1}}")
   })
 })
