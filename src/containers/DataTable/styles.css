@@ -1,0 +1,18 @@
+.datatable {
+    font-family: inherit;
+    border-collapse: collapse;
+    margin-block: 30px;
+}
+
+.datatable-header, .datatable-data {
+    border: 1px solid whitesmoke;
+}
+
+.datatable-header {
+    font-weight: 400;
+    padding: 2px 9px;
+}
+
+.datatable-data {
+    height: 20px;
+}

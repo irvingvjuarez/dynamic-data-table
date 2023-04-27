@@ -1,6 +1,12 @@
+import "./styles.css"
+
 const QueryDisplayer: React.FC<QueryDisplayerProps> = ({ content }) => {
     return (
-        <div>{content}</div>
+        <pre className="query--wrapper">
+            <code className="query--code">
+                {content}
+            </code>
+        </pre>
     )
 }
 
