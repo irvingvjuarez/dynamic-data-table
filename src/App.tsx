@@ -1,24 +1,17 @@
+import SearchBar from './components/SearchBar'
 import './App.css'
 
 // import viteLogo from '/vite.svg'
 // import reactLogo from './assets/react.svg'
 
 function App() {
-  const { query, createQuery } = useQuery()
+  const { query, createQuery, dataProps } = useQuery("Concepto 1", "Concepto 2")
 
   return (
     <>
       <SearchBar onSearch={createQuery} />
-      <DataTable />
+      <DataTable columns={dataProps} />
       <QueryDisplayer content={query} />
-
-      {/* SearchBar component 👇 */}
-      {/* <form>
-        <input type="search" placeholder="Search by ID, CUIT or Name" />
-        <button type="button">
-          Search
-        </button>
-      </form> */}
     </>
   )
 }
