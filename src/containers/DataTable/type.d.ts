@@ -1,0 +1,3 @@
+type DataTableProps = {
+    columns: string[]
+}

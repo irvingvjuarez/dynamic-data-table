@@ -1,0 +1,3 @@
+type QueryDisplayerProps = {
+    content: string
+}
