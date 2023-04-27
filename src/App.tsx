@@ -1,4 +1,5 @@
 import SearchBar from './components/SearchBar'
+import useQuery from './hooks/useQuery'
 import './App.css'
 
 // import viteLogo from '/vite.svg'
