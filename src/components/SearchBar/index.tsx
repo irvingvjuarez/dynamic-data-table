@@ -1,17 +1,32 @@
-import { useRef } from "react"
-
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-    const inputValue = useRef<null | HTMLInputElement>(null)
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onCleanSearch }) => {
+    // TODO: useSearchBar custom hook
+    // To avoid blending logic and UI code
 
     const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
-        onSearch((inputValue.current as HTMLInputElement).value)
+        const target = evt.target as HTMLFormElement
+        const currentValue = (target.firstChild as HTMLInputElement).value
+
+        if (currentValue) {
+            onSearch(currentValue)
+        } else {
+            onCleanSearch()
+        }
+
+    }
+
+    const handleClearingQuery = (evt: React.FormEvent<HTMLInputElement>) => {
+        const value = (evt.target as HTMLInputElement).value
+
+        if (!value) {
+            onCleanSearch()
+        }
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <input
-                ref={inputValue}
+                onInput={handleClearingQuery}
                 type="search"
                 placeholder="Search by ID, CUIT or Name"
             />

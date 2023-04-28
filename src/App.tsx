@@ -8,11 +8,11 @@ import './App.css'
 // import reactLogo from './assets/react.svg'
 
 function App() {
-  const { query, createQuery, dataProps } = useQuery("Concepto 1", "Concepto 2")
+  const { query, createQuery, dataProps, clearFilters } = useQuery("Concepto 1", "Concepto 2")
 
   return (
     <>
-      <SearchBar onSearch={createQuery} />
+      <SearchBar onSearch={createQuery} onCleanSearch={clearFilters} />
       <DataTable columns={dataProps} />
       <QueryDisplayer content={query} />
     </>
