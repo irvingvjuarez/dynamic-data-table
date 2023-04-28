@@ -40,6 +40,15 @@ describe("Commerces controller tests", () => {
     await expect(commerces.filterBy("active", false)).toEqual({"$or": [{"ID": {"$regex": "34"}}, {"CUIT": {"$regex": "34"}}, {"Comercio": {"$regex": "34"}}], "active": false})
   })
 
+  test.only("Cleaning Filter by", async () => {
+    const commerces = new Commerces()
+
+    await expect(commerces.filterBy("search", "blockchain")).toEqual({"$or": [{"ID": {"$regex": "blockchain"}}, {"CUIT": {"$regex": "blockchain"}}, {"Comercio": {"$regex": "blockchain"}}]})
+    commerces.clearFilters()
+
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores")
+  })
+
   test("Sorted by", async () => {
     const commerces = new Commerces()
     await expect(commerces.sortBy("Comercios")).toEqual({"$orderby": {"Comercios": 1}})

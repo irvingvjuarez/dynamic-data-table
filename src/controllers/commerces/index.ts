@@ -34,7 +34,19 @@ class Commerces {
     return query.replaceAll('"', "'")
   }
 
-  protected addToQuery(prop: "sorting" | "filters") {
+  protected removeFromQuery(prop: QueryAction) {
+    let property
+
+    if (prop === "filters") {
+      property = "q"
+    } else {
+      property = "h"
+    }
+
+    delete this._query["q"]
+  }
+
+  protected addToQuery(prop: QueryAction) {
     let statement = {}
 
     if (prop === "filters") {
@@ -62,6 +74,7 @@ class Commerces {
 
   public clearSorting() {
     this._sorting = {}
+    this.removeFromQuery("sorting")
 
     return this._sorting
   }
@@ -88,6 +101,7 @@ class Commerces {
 
   public clearFilters() {
     this._filters = {}
+    this.removeFromQuery("filters")
   }
 }
 

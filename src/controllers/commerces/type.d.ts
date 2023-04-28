@@ -1,0 +1,1 @@
+type QueryAction = "sorting" | "filters"
