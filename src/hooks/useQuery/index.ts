@@ -6,21 +6,41 @@ const useQuery = (...props: string[]) => {
     const dataProps = commerces.allProps()
     const [currentQuery, useCurrentQuery] = useState(commerces.createQuery())
 
+    const updateCurrentQuery = () => {
+        useCurrentQuery(commerces.createQuery())
+    }
+
     const clearFilters = () => {
         commerces.clearFilters()
-        useCurrentQuery(commerces.createQuery())
+        updateCurrentQuery()
     }
     
     const createQuery = (input: string) => {
         commerces.filterBy("search", input)
-        useCurrentQuery(commerces.createQuery())
+        updateCurrentQuery()
+    }
+
+    const activeFilter = (option: "yes" | "no" | "both") => {
+
+    }
+
+    const sortBy = (option: "Comercios" | "none" | "CUIT") => {
+        if (option != "none") {
+            commerces.sortBy(option)
+        } else {
+            commerces.clearSorting()
+        }
+
+        updateCurrentQuery()
     }
 
     return {
         createQuery,
         dataProps,
         query: currentQuery,
-        clearFilters
+        clearFilters,
+        activeFilter,
+        sortBy
     }
 }
 
