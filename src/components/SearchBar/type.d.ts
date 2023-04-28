@@ -1,3 +1,3 @@
 type SearchBarProps = {
-    onSearch(): void
+    onSearch(input: string): void
 }

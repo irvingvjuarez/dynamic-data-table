@@ -6,7 +6,8 @@ const useQuery = (...props: string[]) => {
     const dataProps = commerces.allProps()
     const [currentQuery, useCurrentQuery] = useState(commerces.createQuery())
 
-    const createQuery = () => {
+    const createQuery = (input: string) => {
+        commerces.filterBy("search", input)
         useCurrentQuery(commerces.createQuery())
     }
 
