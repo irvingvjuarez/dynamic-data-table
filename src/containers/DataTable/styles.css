@@ -1,7 +1,7 @@
 .datatable {
     font-family: inherit;
     border-collapse: collapse;
-    margin-block: 30px;
+    margin-bottom: 30px;
 }
 
 .datatable-header, .datatable-data {

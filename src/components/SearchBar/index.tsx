@@ -1,3 +1,5 @@
+import "./styles.css"
+
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onCleanSearch }) => {
     // TODO: useSearchBar custom hook
     // To avoid blending logic and UI code
@@ -24,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onCleanSearch }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="search-bar-wrapper" onSubmit={handleSubmit}>
             <input
                 onInput={handleClearingQuery}
                 type="search"

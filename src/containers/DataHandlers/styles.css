@@ -1,0 +1,10 @@
+.dropdowns-wrapper {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.single-dropdown {
+    display: inline-block;
+    margin: 0 10px;
+}

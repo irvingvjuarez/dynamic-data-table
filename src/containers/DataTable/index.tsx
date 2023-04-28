@@ -1,28 +1,33 @@
+import DataHandlers from "../DataHandlers"
 import "./styles.css"
 
 const DataTable: React.FC<DataTableProps> = ({ columns }) => {
     return (
-        <table className="datatable">
-            <thead>
-                <tr>
-                    {columns.map(column => (
-                        <th key={column  + "-th"} className="datatable-header">
-                            {column}
-                        </th>
-                    ))}
-                </tr>
-            </thead>
+        <>
+            <DataHandlers />
 
-            <tbody>
-                <tr>
-                    {columns.map(column => (
-                        <td key={column + "-td"} className="datatable-data">
+            <table className="datatable">
+                <thead>
+                    <tr>
+                        {columns.map(column => (
+                            <th key={column  + "-th"} className="datatable-header">
+                                {column}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
 
-                        </td>
-                    ))}
-                </tr>
-            </tbody>
-        </table>
+                <tbody>
+                    <tr>
+                        {columns.map(column => (
+                            <td key={column + "-td"} className="datatable-data">
+
+                            </td>
+                        ))}
+                    </tr>
+                </tbody>
+            </table>
+        </>
     )
 }
 
