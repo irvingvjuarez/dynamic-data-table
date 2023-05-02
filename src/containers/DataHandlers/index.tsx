@@ -2,7 +2,7 @@ import "./styles.css"
 
 const DataHandlers: React.FC<DataHandlersProps> = ({ onFilter, onSort }) => {
     const handleFilter = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(evt.target.value)
+        onFilter(evt.target.value)
     }
     const handleSort = (evt: React.ChangeEvent<HTMLSelectElement>) => {
         onSort(evt.target.value)
