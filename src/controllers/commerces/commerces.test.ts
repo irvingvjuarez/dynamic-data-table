@@ -40,7 +40,7 @@ describe("Commerces controller tests", () => {
     await expect(commerces.filterBy("active", false)).toEqual({"$or": [{"ID": {"$regex": "34"}}, {"CUIT": {"$regex": "34"}}, {"Comercio": {"$regex": "34"}}], "active": false})
   })
 
-  test.only("Cleaning Filter by", async () => {
+  test("Cleaning Filter by", async () => {
     const commerces = new Commerces()
 
     await expect(commerces.filterBy("search", "blockchain")).toEqual({"$or": [{"ID": {"$regex": "blockchain"}}, {"CUIT": {"$regex": "blockchain"}}, {"Comercio": {"$regex": "blockchain"}}]})
@@ -89,5 +89,23 @@ describe("Commerces controller tests", () => {
 
     commerces.sortBy("CUIT")
     await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'$or':[{'ID':{'$regex':'34'}},{'CUIT':{'$regex':'34'}},{'Comercio':{'$regex':'34'}}]}&h={'$orderby':{'CUIT':1}}")
+  })
+
+  test("Clear Filter by Active", async () => {
+    const commerces = new Commerces()
+    commerces.filterBy("active", true)
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'active':true}")
+
+    commerces.clearActiveFilter()
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={}")
+  })
+
+  test.only("Real life example", async () => {
+    const commerces = new Commerces()
+    commerces.filterBy("search", "godzilla")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'$or':[{'ID':{'$regex':'godzilla'}},{'CUIT':{'$regex':'godzilla'}},{'Comercio':{'$regex':'godzilla'}}]}")
+
+    commerces.sortBy("CUIT")
+    await expect(commerces.createQuery()).toBe("https://api.koibanx.com/stores?q={'$or':[{'ID':{'$regex':'godzilla'}},{'CUIT':{'$regex':'godzilla'}},{'Comercio':{'$regex':'godzilla'}}]}&h={'$orderby':{'CUIT':1}}")
   })
 })

@@ -43,7 +43,7 @@ class Commerces {
       property = "h"
     }
 
-    delete this._query["q"]
+    delete this._query[property]
   }
 
   protected addToQuery(prop: QueryAction) {
@@ -83,7 +83,12 @@ class Commerces {
     return this._props
   }
 
-  public filterBy(key: string, value: string | boolean) {
+  public clearActiveFilter() {
+    delete this._filters["active"]
+    this.addToQuery("filters")
+  }
+
+  public filterBy(key: "search" | "active", value: string | boolean) {
     if (key === "search") { // Or statement
       const searchOptions = ["ID", "CUIT", "Comercio"]
       const searchOptionsQueries = searchOptions.map(option => ({
