@@ -1,8 +1,9 @@
 import Commerces from "@app/controllers/commerces"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const useQuery = (...props: string[]) => {
-    const commerces = new Commerces(...props)
+    const commercesRef = useRef(new Commerces(...props))
+    const commerces = commercesRef.current
     const dataProps = commerces.allProps()
     const [currentQuery, useCurrentQuery] = useState(commerces.createQuery())
 
@@ -21,7 +22,13 @@ const useQuery = (...props: string[]) => {
     }
 
     const activeFilter = (option: "yes" | "no" | "both") => {
+        if (option != "both") {
+            commerces.filterBy("active", option === "yes" ? true : false)
+        } else {
+            commerces.clearActiveFilter()
+        }
 
+        updateCurrentQuery()
     }
 
     const sortBy = (option: "Comercios" | "none" | "CUIT") => {
